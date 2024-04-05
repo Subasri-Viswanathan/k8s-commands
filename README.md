@@ -1,6 +1,54 @@
 # k8s-commands
 Basic commands for k8s
 
+Build Image
+IDP
+docker build -t bold-identity:test -f bold-identity.txt .
+docker build -t bold-idp-api:test -f bold-idp-api.txt .  
+docker build -t bold-ums:test -f bold-ums.txt . 
+
+Report Server 
+ 
+docker build -t boldreports-server:test -f boldreports-server.txt . 
+docker build -t boldreports-server-api:test -f boldreports-server-api.txt . 
+docker build -t boldreports-server-jobs:test -f boldreports-server-jobs.txt . 
+docker build -t boldreports-designer:test -f boldreports-designer.txt . 
+docker build -t boldreports-viewer:test -f boldreports-server-viewer.txt .
+  
+Image created in local
+ 
+IDP (Commit the local image to GCR)	
+ 
+docker tag bold-identity:test  gcr.io/boldreports-dev/bold-identity:5.1.21_06012023_vbasoftware
+docker tag bold-idp-api:test gcr.io/boldreports-dev/bold-idp-api:5.1.21_06012023_vbasoftware 
+docker tag bold-ums:test gcr.io/boldreports-dev/bold-ums:5.1.21_06012023_vbasoftware 
+ 
+Report Server 
+ 
+docker tag boldreports-server:test gcr.io/boldreports-dev/boldreports-server:5.1.21_06012023_vbasoftware 
+docker tag boldreports-server-api:test gcr.io/boldreports-dev/boldreports-server-api:5.1.21_06012023_vbasoftware
+docker tag boldreports-server-jobs:test gcr.io/boldreports-dev/boldreports-server-jobs:5.1.21_06012023_vbasoftware
+docker tag boldreports-designer:test gcr.io/boldreports-dev/boldreports-designer:5.1.21_06012023_vbasoftware 
+docker tag boldreports-viewer:test gcr.io/boldreports-dev/boldreports-viewer:5.1.21_06012023_vbasoftware 
+ 
+ 
+IDP  (PUSH IMG TO GCR )	
+ 
+docker push gcr.io/boldreports-dev/bold-identity:5.1.21_06012023_vbasoftware
+docker push gcr.io/boldreports-dev/bold-idp-api:5.1.21_06012023_vbasoftware 
+docker push gcr.io/boldreports-dev/bold-ums:5.1.21_06012023_vbasoftware 
+ 
+Report Server 
+ 
+docker push gcr.io/boldreports-dev/boldreports-server:5.1.21_06012023_vbasoftware 
+docker push gcr.io/boldreports-dev/boldreports-server-api:5.1.21_06012023_vbasoftware 
+docker push gcr.io/boldreports-dev/boldreports-server-jobs:5.1.21_06012023_vbasoftware
+docker push gcr.io/boldreports-dev/boldreports-designer:5.1.21_06012023_vbasoftware 
+docker push gcr.io/boldreports-dev/boldreports-viewer:5.1.21_06012023_vbasoftware
+
+___________________________________________________________________________________________
+To Apply Image:
+
 kubectl set image deployment/id-web-deployment id-web-container=gcr.io/boldreports-dev/bold-identity:4.2.78_24052023_vbasoftware --namespace=bold-services --record
 
 kubectl set image deployment/id-api-deployment id-api-container=gcr.io/boldreports-dev/bold-idp-api:4.2.78_24052023_vbasoftware --namespace=bold-services --record
@@ -17,87 +65,6 @@ kubectl set image deployment/reports-jobs-deployment reports-jobs-container=gcr.
 kubectl set image deployment/reports-reportservice-deployment reports-reportservice-container=gcr.io/boldreports-dev/boldreports-designer:4.2.78_24052023_vbasoftware --namespace=bold-services --record
 
 _______________________________________________________________________________________________
-
-
-docker build -t bold-identity:4.2.52_06042023_unchain -f bold-identity.txt .	
- 
- 
-docker build -t bold-idp-api:4.2.52_06042023_unchain -f bold-idp-api.txt . 
- 
- 
-docker build -t bold-ums:4.2.52_06042023_unchain -f bold-ums.txt . 
- 
- 
-Report Server 
- 
-docker build -t boldreports-server:4.2.52_06042023_unchain -f boldreports-server.txt . 
- 
- 
-docker build -t boldreports-server-api:4.2.52_06042023_unchain -f boldreports-server-api.txt . 
- 
- 
-docker build -t boldreports-server-jobs:4.2.52_06042023_unchain -f boldreports-server-jobs.txt . 
- 
- 
-docker build -t boldreports-designer:4.2.52_06042023_unchain -f boldreports-designer.txt . 
-  
- 
- 
-  
- Image created in local
- 
-IDP (Commit the local image to GCR)	
- 
-docker tag bold-identity:4.2.52_06042023_unchain  gcr.io/boldreports-dev/bold-identity:4.2.52_unchain
- 
- 
-docker tag bold-idp-api:4.2.52_06042023_unchain gcr.io/boldreports-dev/bold-idp-api:4.2.52_unchain 
- 
- 
-docker tag bold-ums:4.2.52_06042023_unchain gcr.io/boldreports-dev/bold-ums:4.2.52_unchain
- 
- 
-Report Server 
- 
-docker tag boldreports-server:4.2.52_06042023_unchain gcr.io/boldreports-dev/boldreports-server:4.2.52_unchain 
- 
- 
-docker tag boldreports-server-api:4.2.52_06042023_subha gcr.io/boldreports-dev/boldreports-server-api:4.2.52_unchain
- 
- 
-docker tag boldreports-server-jobs:4.2.52_06042023_subha gcr.io/boldreports-dev/boldreports-server-jobs:4.2.52_unchain
- 
- 
-docker tag boldreports-designer:4.2.52_06042023_subha gcr.io/boldreports-dev/boldreports-designer:4.2.52_unchain 
- 
- 
- 
-IDP  (PUSH IMG TO GCR )	
- 
-docker push gcr.io/boldreports-dev/bold-identity:4.2.52_unchain
- 
- 
-docker push gcr.io/boldreports-dev/bold-idp-api:4.2.52_unchain 
- 
- 
-docker push gcr.io/boldreports-dev/bold-ums:4.2.52_unchain 
- 
- 
-Report Server 
- 
-docker push gcr.io/boldreports-dev/boldreports-server:4.2.52_unchain 
- 
- 
-docker push gcr.io/boldreports-dev/boldreports-server-api:4.2.52_unchain 
- 
- 
-docker push gcr.io/boldreports-dev/boldreports-server-jobs:4.2.52_unchain
- 
- 
-docker push gcr.io/boldreports-dev/boldreports-designer:4.2.52_unchain 
-
-
-___________________________________________________________________________________________
 
 
 aws eks --region us-east-1 update-kubeconfig --name cluster57364 
