@@ -130,11 +130,17 @@ _________________________________________________________________
 kubectl rollout restart deployment/id-web-deployment -n bold-services2
 
 kubectl rollout restart deployment/id-api-deployment -n bold-services2
+
 kubectl rollout restart deployment/id-ums-deployment -n bold-services2
+
 kubectl rollout restart deployment/reports-api-deployment -n bold-services2
+
 kubectl rollout restart deployment/reports-jobs-deployment -n bold-services2
+
 kubectl rollout restart deployment/reports-web-deployment -n bold-services2
+
 kubectl rollout restart deployment/reports-reportservice-deployment -n bold-services2
+
 kubectl rollout restart deployment/reports-viewer-deployment -n bold-services2
 
 ___________________________________________________________________________
@@ -148,15 +154,22 @@ _____________________________________________________________________________
 To install BR using helm alb -ingress EKS
 
 curl -o iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.2.1/docs/install/iam_policy.json
+
 kubectl apply -k "github.com/kubernetes-sigs/aws-efs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.4"
 
+
 helm repo add boldreports https://subasri-viswanathan.github.io/boldreports-helm/
+
 kubectl apply -k "github.com/aws/eks-charts/stable/aws-load-balancer-controller//crds?ref=master"
+
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=cluster57364
 
 helm install boldreports boldreports/boldreports -f eks-alb-values.yaml -n bold-services --create-namespace
+
 kubectl create secret tls bold-tls -n bold-services --key "private-key.pem" --cert "certificate.pem"
+
 kubectl get ingress -n bold-services
+
 helm uninstall boldreports boldreports/boldreports -n bold-services
 
 helm install boldreports boldreports/boldreports -f aks-values.yaml -n bold-services --create-namespace
