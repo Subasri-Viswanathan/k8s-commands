@@ -2,88 +2,73 @@
 Basic commands for k8s
 
 Build Image
-IDP
-docker build -t bold-identity:test -f bold-identity.txt .
-
-docker build -t bold-idp-api:test -f bold-idp-api.txt .  
-
-docker build -t bold-ums:test -f bold-ums.txt . 
-
-Report Server 
+DP
+docker build -t bold-identity:6.1.34_07242024_schedule -f bold-identity.txt .
+docker build -t bold-idp-api:6.1.34_07242024_schedule -f bold-idp-api.txt .
+docker build -t bold-ums:6.1.34_07242024_schedule -f bold-ums.txt .
  
-docker build -t boldreports-server:test -f boldreports-server.txt . 
-
-docker build -t boldreports-server-api:test -f boldreports-server-api.txt . 
-
+Report Server
+ 
+docker build -t boldreports-server:test -f boldreports-server.txt .
+docker build -t boldreports-server-api:test -f boldreports-server-api.txt .
 docker build -t boldreports-server-jobs:test -f boldreports-server-jobs.txt .
-
-docker build -t boldreports-designer:test -f boldreports-designer.txt . 
-
+docker build -t boldreports-designer:test -f boldreports-designer.txt .
 docker build -t boldreports-viewer:test -f boldreports-server-viewer.txt .
-  
-Image created in local
- 
-IDP (Commit the local image to GCR)	
- 
-docker tag bold-identity:test  gcr.io/boldreports-dev/bold-identity:5.1.21_06012023_vbasoftware
-
-docker tag bold-idp-api:test gcr.io/boldreports-dev/bold-idp-api:5.1.21_06012023_vbasoftware 
-
-docker tag bold-ums:test gcr.io/boldreports-dev/bold-ums:5.1.21_06012023_vbasoftware 
- 
-Report Server 
- 
-docker tag boldreports-server:test gcr.io/boldreports-dev/boldreports-server:5.1.21_06012023_vbasoftware 
-
-docker tag boldreports-server-api:test gcr.io/boldreports-dev/boldreports-server-api:5.1.21_06012023_vbasoftware
-
-docker tag boldreports-server-jobs:test gcr.io/boldreports-dev/boldreports-server-jobs:5.1.21_06012023_vbasoftware
-
-docker tag boldreports-designer:test gcr.io/boldreports-dev/boldreports-designer:5.1.21_06012023_vbasoftware 
-
-docker tag boldreports-viewer:test gcr.io/boldreports-dev/boldreports-viewer:5.1.21_06012023_vbasoftware 
+docker build -t bold-etl:test -f bold-etl.txt .
  
  
-IDP  (PUSH IMG TO GCR )	
  
-docker push gcr.io/boldreports-dev/bold-identity:5.1.21_06012023_vbasoftware
-
-docker push gcr.io/boldreports-dev/bold-idp-api:5.1.21_06012023_vbasoftware 
-
-docker push gcr.io/boldreports-dev/bold-ums:5.1.21_06012023_vbasoftware 
+docker tag bold-identity:6.1.45_06192024_releasetesting2 us-docker.pkg.dev/boldreports-dev/images/bold-identity:6.1.45_06192024_releasetesting2
+docker tag bold-idp-api:test us-docker.pkg.dev/boldreports-dev/images/bold-idp-api:6.1.45_06192024_releasetesting
+docker tag bold-ums:test us-docker.pkg.dev/boldreports-dev/images/bold-ums:6.1.45_06192024_releasetesting
  
-Report Server 
+docker tag boldreports-server:test us-docker.pkg.dev/boldreports-dev/images/boldreports-server:6.1.45_06192024_releasetesting
+docker tag boldreports-server-api:test us-docker.pkg.dev/boldreports-dev/images/boldreports-server-api:6.1.45_06192024_releasetesting
+docker tag boldreports-server-jobs:test us-docker.pkg.dev/boldreports-dev/images/boldreports-server-jobs:6.1.45_06192024_releasetesting
+docker tag boldreports-designer:test us-docker.pkg.dev/boldreports-dev/images/boldreports-designer:6.1.45_06192024_releasetesting
+docker tag boldreports-viewer:test us-docker.pkg.dev/boldreports-dev/images/boldreports-viewer:6.1.45_06192024_releasetesting
+docker tag bold-etl:test us-docker.pkg.dev/boldreports-dev/images/bold-etl:6.1.45_06192024_releasetesting
  
-docker push gcr.io/boldreports-dev/boldreports-server:5.1.21_06012023_vbasoftware 
-
-docker push gcr.io/boldreports-dev/boldreports-server-api:5.1.21_06012023_vbasoftware 
-
-docker push gcr.io/boldreports-dev/boldreports-server-jobs:5.1.21_06012023_vbasoftware
-
-docker push gcr.io/boldreports-dev/boldreports-designer:5.1.21_06012023_vbasoftware 
-
-docker push gcr.io/boldreports-dev/boldreports-viewer:5.1.21_06012023_vbasoftware
+ 
+Google Cloud:
+IDP
+docker push us-docker.pkg.dev/boldreports-dev/images/bold-identity:6.1.45_06192024_releasetesting2
+docker push us-docker.pkg.dev/boldreports-dev/images/bold-idp-api:6.1.45_06192024_releasetesting
+docker push us-docker.pkg.dev/boldreports-dev/images/bold-ums:6.1.45_06192024_releasetesting
+ 
+ 
+Report Server
+ 
+docker push us-docker.pkg.dev/boldreports-dev/images/boldreports-server:6.1.45_06192024_releasetesting
+docker push us-docker.pkg.dev/boldreports-dev/images/boldreports-server-api:6.1.45_06192024_releasetesting
+docker push us-docker.pkg.dev/boldreports-dev/images/boldreports-server-jobs:6.1.45_06192024_releasetesting
+docker push us-docker.pkg.dev/boldreports-dev/images/boldreports-designer:6.1.45_06192024_releasetesting
+docker push us-docker.pkg.dev/boldreports-dev/images/boldreports-viewer:6.1.45_06192024_releasetesting
+docker push us-docker.pkg.dev/boldreports-dev/images/bold-etl:6.1.45_06192024_releasetesting
 
 ___________________________________________________________________________________________
 To Apply Image:
 
-kubectl set image deployment/id-web-deployment id-web-container=gcr.io/boldreports-dev/bold-identity:4.2.78_24052023_vbasoftware --namespace=bold-services --record
+kubectl set image deployment/id-web-deployment id-web-container=us-docker.pkg.dev/boldreports-dev/images/bold-identity:6.1.34_24072024_schedule --namespace=bold-services --record
+ 
+kubectl set image deployment/id-api-deployment id-api-container=us-docker.pkg.dev/boldreports-dev/images/bold-idp-api:6.1.34_24072024_schedule --namespace=bold-services --record
+ 
+kubectl set image deployment/id-ums-deployment id-ums-container=us-docker.pkg.dev/boldreports-dev/images/bold-ums:6.1.34_24072024_schedule --namespace=bold-services --record
+ 
+kubectl set image deployment/reports-web-deployment reports-web-container=us-docker.pkg.dev/boldreports-dev/images/boldreports-server:6.1.34_24072024_schedule --namespace=bold-services --record
+ 
+kubectl set image deployment/reports-api-deployment reports-api-container=us-docker.pkg.dev/boldreports-dev/images/boldreports-server-api:6.1.34_24072024_schedule --namespace=bold-services --record
+ 
+kubectl set image deployment/reports-jobs-deployment reports-jobs-container=us-docker.pkg.dev/boldreports-dev/images/boldreports-server-jobs:6.1.34_24072024_schedule --namespace=bold-services --record
+ 
+kubectl set image deployment/reports-reportservice-deployment reports-reportservice-container=us-docker.pkg.dev/boldreports-dev/images/boldreports-designer:6.1.34_24072024_schedule --namespace=bold-services --record
+ 
+kubectl set image deployment/reports-viewer-deployment reports-viewer-container=us-docker.pkg.dev/boldreports-dev/images/boldreports-viewer:6.1.34_24072024_schedule --namespace=bold-services --record
+ 
+kubectl set image deployment/bold-etl-deployment bold-etl-container=us-docker.pkg.dev/boldreports-dev/images/bold-etl:6.1.34_24072024_schedule --namespace=bold-services --record
 
-kubectl set image deployment/id-api-deployment id-api-container=gcr.io/boldreports-dev/bold-idp-api:4.2.78_24052023_vbasoftware --namespace=bold-services --record
-
-kubectl set image deployment/id-ums-deployment id-ums-container=gcr.io/boldreports-dev/bold-ums:4.2.78_24052023_vbasoftware --namespace=bold-services --record
-
-
-kubectl  set image deployment/reports-web-deployment reports-web-container=gcr.io/boldreports-dev/boldreports-server:4.2.78_24052023_vbasoftware --namespace=bold-services --record
-
-kubectl set image deployment/reports-api-deployment reports-api-container=gcr.io/boldreports-dev/boldreports-server-api:4.2.78_24052023_vbasoftware --namespace=bold-services --record
-
-kubectl set image deployment/reports-jobs-deployment reports-jobs-container=gcr.io/boldreports-dev/boldreports-server-jobs:4.2.78_24052023_vbasoftware --namespace=bold-services --record
-
-kubectl set image deployment/reports-reportservice-deployment reports-reportservice-container=gcr.io/boldreports-dev/boldreports-designer:4.2.78_24052023_vbasoftware --namespace=bold-services --record
 
 _______________________________________________________________________________________________
-
 
 aws eks --region us-east-1 update-kubeconfig --name cluster57364 
 
@@ -107,6 +92,9 @@ helm uninstall boldreports boldreports -n bold-services
 
 helm install boldreports2 boldreports -f values.yaml -n bold-services
 
+
+_______________________________________________________________________________
+
 kubectl describe pod reports-api-deployment-fc4cdfd57-z9drr -n bold-services - To describe
 
 Kubectl exec -it id-web-deployment-7cff6f5f5b-cpn77  -n bold-services -- bash  - To bash
@@ -118,6 +106,8 @@ kubectl delete pod reports-web-deployment-6c8b7b4f5-75sm4 -n bold-services - To 
 kubectl delete pod reports-web-deployment-6c8b7b4f5-75sm4 -n bold-services --grace-period=0 --force  - To delete the pod immediately without waiting for grace period.
 
 kubectl logs id-api-deployment-766dbb944b-rg5bq -n bold-services  -> To get pod logs 
+
+delete file inside the container: kubectl exec -n bold-services id-web-deployment-5b44f57976-7mz87 -- sh -c 'rm -rf /application/app_data/reporting/Jobs/Export/*'
 
 kubectl get node -o wide -n bold-services 
 
