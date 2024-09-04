@@ -243,9 +243,12 @@ you can get the download link
 
 _________________________________________________
 
-istioctl version
+**istioctl version
+**
 kubectl -n istio-system get deployment istiod
+
 kubectl -n istio-system get deployment istio-ingressgateway
+
 
 client version: 1.18.3
 control plane version: 1.18.3
